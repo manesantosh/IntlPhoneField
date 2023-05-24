@@ -53,13 +53,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   late SharedPreferences sharedPreferences;
 
-
   void _setState()async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      firstName = sharedPreferences.getString("first_name") ?? "";
-      lastName = sharedPreferences.getString("last_name") ?? "";
-      email = sharedPreferences.getString("email") ?? "";
+      firstName = sharedPreferences.getString("first_name") ?? "firstName";
+      lastName = sharedPreferences.getString("last_name") ?? "lastName";
+      email = sharedPreferences.getString("email") ?? "email";
     });
   }
 
