@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intlphonefield/Constants/String_Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddContactDetails extends StatefulWidget{
@@ -29,7 +30,7 @@ class _AddContactDetailsState extends State<AddContactDetails> {
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text("Add Contact", style: TextStyle(
+        title: const Text(addContact, style: TextStyle(
             color: Colors.black
         ),),
         centerTitle: true,
@@ -89,11 +90,11 @@ class _AddContactDetailsState extends State<AddContactDetails> {
                       child: TextFormField(
                          inputFormatters: [
                             FilteringTextInputFormatter.allow(
-                              RegExp(r"[a-zA-Z]+|\s"),
+                              RegExp(nameRegExpConst),
                             )
                          ],
                         decoration: const InputDecoration(
-                            labelText: 'First Name',
+                            labelText: firstNameConst,
                             contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                             border: InputBorder.none,
                         ),
@@ -119,11 +120,11 @@ class _AddContactDetailsState extends State<AddContactDetails> {
                       child: TextFormField(
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
-                            RegExp(r"[a-zA-Z]+|\s"),
+                            RegExp(nameRegExpConst),
                           )
                         ],
                         decoration: const InputDecoration(
-                          labelText: 'Last Name',
+                          labelText: lastNameConst,
                           contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                           border: InputBorder.none,
                         ),
@@ -150,11 +151,11 @@ class _AddContactDetailsState extends State<AddContactDetails> {
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(10),
                           FilteringTextInputFormatter.allow(
-                            RegExp(r"[0-9]"),
+                            RegExp(phoneRegExpConst),
                           )
                         ],
                         decoration: const InputDecoration(
-                          labelText: 'Phone Number',
+                          labelText: phoneConst,
                           contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                           border: InputBorder.none,
                         ),
@@ -179,7 +180,7 @@ class _AddContactDetailsState extends State<AddContactDetails> {
                       ),
                       child: TextFormField(
                         decoration: const InputDecoration(
-                          labelText: 'Email',
+                          labelText: emailConst,
                           contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                           border: InputBorder.none,
                         ),
@@ -237,27 +238,22 @@ class _AddContactDetailsState extends State<AddContactDetails> {
 
 extension ExtString on String {
   bool get isValidEmail {
-    final emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    final emailRegExp = RegExp(emailRegExpConst);
     return emailRegExp.hasMatch(this);
   }
 
   bool get isValidName{
-    final nameRegExp = RegExp(r"[a-zA-Z]+|\s");
+    final nameRegExp = RegExp(nameRegExpConst);
     return nameRegExp.hasMatch(this);
   }
 
   bool get isValidPassword{
-    final passwordRegExp =
-    RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\><*~]).{8,}/pre>');
+    final passwordRegExp = RegExp(passwordRegExpConst);
     return passwordRegExp.hasMatch(this);
   }
 
-  bool get isNotNull{
-    return this!=null;
-  }
-
   bool get isValidPhone{
-    final phoneRegExp = RegExp(r"[0-9]");
+    final phoneRegExp = RegExp(phoneRegExpConst);
     return phoneRegExp.hasMatch(this);
   }
 

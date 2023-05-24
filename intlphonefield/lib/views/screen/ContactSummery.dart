@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intlphonefield/Constants/String_Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ContactSummery extends StatefulWidget{
@@ -11,28 +12,28 @@ class ContactSummery extends StatefulWidget{
 class _ContactSummeryState extends State<ContactSummery> {
   late SharedPreferences sharedPreferences;
 
-  String firstName = "firstName";
-  String lastName = "lastName";
-  String email = "email";
-  String phone = "phone";
-  String accountNumber = "accountNumber";
-  String routingNumber = "routingNumber";
-  String accountType = "accountType";
-  String bankName = "bankName";
-  String paymentMethod = "method";
+  String firstName = firstNameConst;
+  String lastName = lastNameConst;
+  String email = emailConst;
+  String phone = phoneConst;
+  String accountNumber = accountNumberConst;
+  String routingNumber = routingNumberConst;
+  String accountType = accountTypeConst;
+  String bankName = bankNameConst;
+  String paymentMethod = paymentMethodConst;
 
   void _setState()async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      firstName = sharedPreferences.getString("first_name") ?? "";
-      lastName = sharedPreferences.getString("last_name") ?? "";
-      email = sharedPreferences.getString("email") ?? "";
-      phone = sharedPreferences.getString("phone") ?? "";
-      accountNumber = sharedPreferences.getString("accountNumber") ?? "";
-      routingNumber = sharedPreferences.getString("routingNumber") ?? "";
-      accountType = sharedPreferences.getString("accountType") ?? "";
-      bankName = sharedPreferences.getString("bankName") ?? "";
-      paymentMethod = sharedPreferences.getString("paymentMethod") ?? "";
+      firstName = sharedPreferences.getString("first_name") ?? firstNameConst;
+      lastName = sharedPreferences.getString("last_name") ?? lastNameConst;
+      email = sharedPreferences.getString("email") ?? emailConst;
+      phone = sharedPreferences.getString("phone") ?? phoneConst;
+      accountNumber = sharedPreferences.getString("accountNumber") ?? accountNumberConst;
+      routingNumber = sharedPreferences.getString("routingNumber") ?? routingNumberConst;
+      accountType = sharedPreferences.getString("accountType") ?? accountTypeConst;
+      bankName = sharedPreferences.getString("bankName") ?? bankNameConst;
+      paymentMethod = sharedPreferences.getString("paymentMethod") ?? paymentMethodConst;
     });
   }
 

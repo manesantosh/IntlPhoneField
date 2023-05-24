@@ -36,18 +36,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  String firstNameStr = firstName;
-  String lastNameStr = lastName;
-  String emailStr = email;
+  String firstNameStr = firstNameConst;
+  String lastNameStr = lastNameConst;
+  String emailStr = emailConst;
 
   late SharedPreferences sharedPreferences;
 
   void _setState()async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      firstNameStr = sharedPreferences.getString(firstName) ?? firstName;
-      lastNameStr = sharedPreferences.getString(firstName) ?? firstName;
-      emailStr = sharedPreferences.getString(firstName) ?? firstName;
+      firstNameStr = sharedPreferences.getString("first_name") ?? firstNameConst;
+      lastNameStr = sharedPreferences.getString("last_name") ?? lastNameConst;
+      emailStr = sharedPreferences.getString("email") ?? emailConst;
     });
   }
 
@@ -80,16 +80,16 @@ class _MyHomePageState extends State<MyHomePage> {
               child: UserAccountsDrawerHeader(
                 decoration: const BoxDecoration(color: Color.fromARGB(
                     211, 211, 211, 211)),
-                accountName: const Text(
-                  "$firstName $lastName",
-                  style: TextStyle(fontSize: 18),
+                accountName: Text(
+                  "$firstNameStr $lastNameStr",
+                  style: const TextStyle(fontSize: 18),
                 ),
-                accountEmail: const Text(email),
+                accountEmail: Text(emailStr),
                 currentAccountPictureSize: const Size.square(50),
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Text(
-                    firstName[0],
+                    firstNameStr[0],
                     style: const TextStyle(fontSize: 30.0, color: Colors.blue),
                   ), //Text
                 ), //circleAvatar
@@ -103,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
               leading: const Icon(Icons.home_outlined),
             ),
             ListTile(
-              title: const Text('Add Contact'),
+              title: const Text(addContact),
               onTap: () {
                 Navigator.pushNamed(context, "./AddContact");
               },
