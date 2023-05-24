@@ -1,7 +1,7 @@
 
 import 'dart:core';
 import 'package:flutter/material.dart';
-import 'package:intlphonefield/PaymentMethodModel.dart';
+import 'package:intlphonefield/model/PaymentMethodModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PaymentMode extends StatefulWidget{

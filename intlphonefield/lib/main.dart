@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intlphonefield/AddContact.dart';
-import 'package:intlphonefield/ContactSummery.dart';
-import 'package:intlphonefield/PaymentMode.dart';
-import 'package:intlphonefield/PyamentDetails.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'AddContactDetails.dart';
+import 'Constants/String_Constants.dart';
+import 'config/route/NavigationRoute.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,14 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: './',
-      routes: {
-        './' : (context) => const MyHomePage(title: 'Home Screen'),
-        './AddContact': (context) => const AddContact(),
-        './AddContactDetails': (context) => const AddContactDetails(),
-        './paymentMode': (context) => const PaymentMode(),
-        './paymentDetails':(context) => const PaymentDetails(),
-        './contactSummery': (context) => const ContactSummery()
-      },
+      onGenerateRoute: NavigationRoute.generateRoute,
     );
   }
 }
@@ -47,18 +36,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  String firstName = "firstName";
-  String lastName = "lastName";
-  String email = "email";
+  String firstNameStr = firstName;
+  String lastNameStr = lastName;
+  String emailStr = email;
 
   late SharedPreferences sharedPreferences;
 
   void _setState()async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      firstName = sharedPreferences.getString("first_name") ?? "firstName";
-      lastName = sharedPreferences.getString("last_name") ?? "lastName";
-      email = sharedPreferences.getString("email") ?? "email";
+      firstNameStr = sharedPreferences.getString(firstName) ?? firstName;
+      lastNameStr = sharedPreferences.getString(firstName) ?? firstName;
+      emailStr = sharedPreferences.getString(firstName) ?? firstName;
     });
   }
 
@@ -75,16 +64,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
-            Text(
-              'Home Screen',
-            ),
+            Text(home),
           ],
         ),
       ),
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
@@ -96,11 +80,11 @@ class _MyHomePageState extends State<MyHomePage> {
               child: UserAccountsDrawerHeader(
                 decoration: const BoxDecoration(color: Color.fromARGB(
                     211, 211, 211, 211)),
-                accountName: Text(
+                accountName: const Text(
                   "$firstName $lastName",
-                  style: const TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18),
                 ),
-                accountEmail: Text(email),
+                accountEmail: const Text(email),
                 currentAccountPictureSize: const Size.square(50),
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.white,
