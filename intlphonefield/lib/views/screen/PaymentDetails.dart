@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intlphonefield/Constants/String_Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PaymentDetails extends StatefulWidget{
@@ -16,11 +17,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   TextEditingController routingNumber = TextEditingController();
   TextEditingController bankName = TextEditingController();
 
-  var items = [
-    'Emergency Account',
-    'Business savings',
-  ];
-  String dropdownValue = 'Emergency Account';
+  var items = [emergencyAccount, businessAccount,];
+  String dropdownValue = emergencyAccount;
   late SharedPreferences sharedPreferences;
 
   void storeValuesInSharedPref() async {
@@ -42,7 +40,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            title: const Text("Add Contact", style: TextStyle(
+            title: const Text(addContact, style: TextStyle(
                 color: Colors.black
             ),),
             centerTitle: true,
@@ -76,7 +74,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                   child: TextField(
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(
-                        RegExp(r"[0-9]"),
+                        RegExp(phoneRegExpConst),
                       )
                     ],
                     controller: accountNumber,
@@ -161,7 +159,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     child: TextField(
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(
-                          RegExp(r"[a-zA-Z]+|\s"),
+                          RegExp(nameRegExpConst),
                         )
                       ],
                       controller: bankName,

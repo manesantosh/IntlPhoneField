@@ -12,6 +12,9 @@ const String bankNameConst = "bankName";
 const String paymentMethodConst = "method";
 
 const String addContact = "Add Contact";
+const String emergencyAccount = "Emergency Account";
+const String businessAccount = "Business savings";
+
 
 
 const String emailRegExpConst = r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+";

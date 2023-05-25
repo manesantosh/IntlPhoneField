@@ -12,14 +12,12 @@ class AddContactDetails extends StatefulWidget{
 }
 
 class _AddContactDetailsState extends State<AddContactDetails> {
-
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneNameController = TextEditingController();
   late SharedPreferences sharedPreferences;
   final _formKey = GlobalKey<FormState>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -211,25 +209,22 @@ class _AddContactDetailsState extends State<AddContactDetails> {
                                   alignment: Alignment.bottomCenter,
                                   child: SizedBox(
                                     width: double.infinity,
-                                    child: Container(
-                                      child: ElevatedButton(
-                                        onPressed: (){
-                                          if (_formKey.currentState!.validate()) {
-                                            storeValuesInSharedPref();
-                                            Navigator.pushNamed(context, "./paymentMode");
-                                          }
-                                        },
-                                        style: ButtonStyle(
-                                          backgroundColor: MaterialStateProperty.all<Color>(const Color.fromRGBO(93, 63, 211, 0.7)),
-                                        ),
-                                        child: const Text("continue", style: TextStyle(
-                                            color: Colors.white
-                                        ),),
+                                    child: ElevatedButton(
+                                      onPressed: (){
+                                        if (_formKey.currentState!.validate()) {
+                                          storeValuesInSharedPref();
+                                          Navigator.pushNamed(context, "./paymentMode");
+                                        }
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(const Color.fromRGBO(93, 63, 211, 0.7)),
                                       ),
+                                      child: const Text("continue", style: TextStyle(
+                                          color: Colors.white
+                                      ),),
                                     ),
                                   ),
                                 )
-
                               ],
                             ),
                           ),
