@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Constants/String_Constants.dart';
 import 'config/route/NavigationRoute.dart';
+import 'config/theme/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,62 +55,64 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     _setState();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        centerTitle: true,
-      ),
-
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(home),
-          ],
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+          centerTitle: true,
         ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(211, 211, 211, 211),
-              ),
-              child: UserAccountsDrawerHeader(
-                decoration: const BoxDecoration(color: Color.fromARGB(
-                    211, 211, 211, 211)),
-                accountName: Text(
-                  "$firstNameStr $lastNameStr",
-                  style: const TextStyle(fontSize: 18),
+
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const <Widget>[
+              Text(home),
+            ],
+          ),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: const BoxDecoration(
+                  color: CustomColors.grey100,
                 ),
-                accountEmail: Text(emailStr),
-                currentAccountPictureSize: const Size.square(50),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Text(
-                    firstNameStr[0],
-                    style: const TextStyle(fontSize: 30.0, color: Colors.blue),
-                  ), //Text
-                ), //circleAvatar
+                child: UserAccountsDrawerHeader(
+                  decoration: const BoxDecoration(color: CustomColors.grey100),
+                  accountName: Text(
+                    "$firstNameStr $lastNameStr",
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                  accountEmail: Text(emailStr),
+                  currentAccountPictureSize: const Size.square(50),
+                  currentAccountPicture: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    child: Text(
+                      firstNameStr[0],
+                      style: const TextStyle(fontSize: 30.0, color: Colors.blue),
+                    ), //Text
+                  ), //circleAvatar
+                ),
               ),
-            ),
-            ListTile(
-              title: const Text('Home'),
-              onTap: () {
-                Navigator.pushNamed(context, "./");
-              },
-              leading: const Icon(Icons.home_outlined),
-            ),
-            ListTile(
-              title: const Text(addContact),
-              onTap: () {
-                Navigator.pushNamed(context, "./AddContact");
-              },
-              leading: const Icon(Icons.contact_page_outlined),
-            ),
-          ],
+              ListTile(
+                title: const Text('Home'),
+                onTap: () {
+                  Navigator.pushNamed(context, "./");
+                },
+                leading: const Icon(Icons.home_outlined),
+              ),
+              ListTile(
+                title: const Text(addContact),
+                onTap: () {
+                  Navigator.pushNamed(context, "./AddContact");
+                },
+                leading: const Icon(Icons.contact_page_outlined),
+              ),
+            ],
+          ),
         ),
       ),
     );
