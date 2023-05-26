@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intlphonefield/Constants/String_Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ContactSummery extends StatefulWidget{
   const ContactSummery({super.key});
@@ -12,34 +13,34 @@ class ContactSummery extends StatefulWidget{
 class _ContactSummeryState extends State<ContactSummery> {
   late SharedPreferences sharedPreferences;
 
-  String firstName = firstNameConst;
-  String lastName = lastNameConst;
-  String email = emailConst;
-  String phone = phoneConst;
-  String accountNumber = accountNumberConst;
-  String routingNumber = routingNumberConst;
-  String accountType = accountTypeConst;
-  String bankName = bankNameConst;
-  String paymentMethod = paymentMethodConst;
+  String firstName = "";
+  String lastName = "";
+  String email = "";
+  String phone = "";
+  String accountNumber = "";
+  String routingNumber = "";
+  String accountType = "";
+  String bankName = "";
+  String paymentMethod = "";
 
-  void _setState()async {
+  void _setState(BuildContext context)async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      firstName = sharedPreferences.getString("first_name") ?? firstNameConst;
-      lastName = sharedPreferences.getString("last_name") ?? lastNameConst;
-      email = sharedPreferences.getString("email") ?? emailConst;
-      phone = sharedPreferences.getString("phone") ?? phoneConst;
-      accountNumber = sharedPreferences.getString("accountNumber") ?? accountNumberConst;
-      routingNumber = sharedPreferences.getString("routingNumber") ?? routingNumberConst;
-      accountType = sharedPreferences.getString("accountType") ?? accountTypeConst;
-      bankName = sharedPreferences.getString("bankName") ?? bankNameConst;
-      paymentMethod = sharedPreferences.getString("paymentMethod") ?? paymentMethodConst;
+      firstName = sharedPreferences.getString("first_name") ?? AppLocalizations.of(context)!.firstNameConst;
+      lastName = sharedPreferences.getString("last_name") ?? AppLocalizations.of(context)!.lastNameConst;
+      email = sharedPreferences.getString("email") ?? AppLocalizations.of(context)!.emailConst;
+      phone = sharedPreferences.getString("phone") ?? AppLocalizations.of(context)!.phoneConst;
+      accountNumber = sharedPreferences.getString("accountNumber") ?? AppLocalizations.of(context)!.accountNumberConst;
+      routingNumber = sharedPreferences.getString("routingNumber") ?? AppLocalizations.of(context)!.routingNumberConst;
+      accountType = sharedPreferences.getString("accountType") ?? AppLocalizations.of(context)!.accountTypeConst;
+      bankName = sharedPreferences.getString("bankName") ?? AppLocalizations.of(context)!.bankNameConst;
+      paymentMethod = sharedPreferences.getString("paymentMethod") ?? AppLocalizations.of(context)!.paymentMethodConst;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    _setState();
+    _setState(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(

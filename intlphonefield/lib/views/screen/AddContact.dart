@@ -1,9 +1,9 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:intlphonefield/Constants/String_Constants.dart';
 import 'package:intlphonefield/config/theme/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class AddContact extends StatefulWidget{
   const AddContact({super.key});
@@ -15,16 +15,21 @@ class AddContact extends StatefulWidget{
 class _AddContactState extends State<AddContact> {
 
   late SharedPreferences sharedPreferences;
+  String dropdownValue = "";
+  var items =["", ""];
 
-  var items = [
-    'Emergency Account',
-    'Business savings',
-  ];
-  String dropdownValue = 'Emergency Account';
-
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    items[0] = AppLocalizations.of(context)!.emergencyAccount;
+    items[1] = AppLocalizations.of(context)!.businessAccount;
+    dropdownValue = AppLocalizations.of(context)!.emergencyAccount;
+
     return  GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -46,22 +51,23 @@ class _AddContactState extends State<AddContact> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
+                children: [
                   Icon(Icons.looks_one, color: Colors.blue),
                   Icon(Icons.looks_two),
                   Icon(Icons.looks_3),
                 ],
               ),
               const SizedBox(height: 40),
-              const Text("Add your bank details", style: TextStyle(
+              Text(AppLocalizations.of(context)!.bankAccountDetailText,
+                style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20
               ),),
               const SizedBox(height: 20),
-              const Text("Adding your bank account details will allow you to easily send and receive money to add from your contacts.",
-                style: TextStyle(
+              Text(AppLocalizations.of(context)!.bankAccountDetailSubText,
+                style: const TextStyle(
                  fontSize: 16,
                 ),
               ),
@@ -106,9 +112,9 @@ class _AddContactState extends State<AddContact> {
                       top: 8,
                       child: Container(
                         color: CustomColors.white100,
-                        child: const Text(
-                          'Create an account',
-                          style: TextStyle(color: Colors.deepPurple, fontSize: 12),
+                        child:  Text(
+                          AppLocalizations.of(context)!.createAnAccount,
+                          style: const TextStyle(color: Colors.deepPurple, fontSize: 12),
                         ),
                       ),
                     ),
@@ -126,7 +132,9 @@ class _AddContactState extends State<AddContact> {
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(CustomColors.purple100 ),
                       ),
-                      child: const Text("continue", style: TextStyle(
+                      child: Text(
+                        AppLocalizations.of(context)!.continueText,
+                        style: const TextStyle(
                           color: Colors.white
                       ),),
                     ),

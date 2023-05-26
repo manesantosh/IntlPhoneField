@@ -3,6 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Constants/String_Constants.dart';
 import 'config/route/NavigationRoute.dart';
 import 'config/theme/colors.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:intlphonefield/l10n/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +14,20 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: title,
       debugShowCheckedModeBanner: false,
+
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: L18n.all,
+
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -37,24 +48,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  String firstNameStr = firstNameConst;
-  String lastNameStr = lastNameConst;
-  String emailStr = emailConst;
+   String firstNameStr = "first name";
+   String lastNameStr = "last name";
+   String emailStr = "email";
 
   late SharedPreferences sharedPreferences;
 
-  void _setState()async {
+  void _setState(BuildContext context)async {
     sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
-      firstNameStr = sharedPreferences.getString("first_name") ?? firstNameConst;
-      lastNameStr = sharedPreferences.getString("last_name") ?? lastNameConst;
-      emailStr = sharedPreferences.getString("email") ?? emailConst;
+      firstNameStr = sharedPreferences.getString("first_name") ?? AppLocalizations.of(context)!.firstNameConst;
+      lastNameStr = sharedPreferences.getString("last_name") ?? AppLocalizations.of(context)!.lastNameConst;
+      emailStr = sharedPreferences.getString("email") ?? AppLocalizations.of(context)!.emailConst;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    _setState();
+    _setState(context);
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -63,10 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
           centerTitle: true,
         ),
 
-        body: Center(
+        body: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
+            children: <Widget>[
               Text(home),
             ],
           ),
@@ -83,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: UserAccountsDrawerHeader(
                   decoration: const BoxDecoration(color: CustomColors.grey100),
                   accountName: Text(
-                    "$firstNameStr $lastNameStr",
+                    "$firstNameStr  $lastNameStr",
                     style: const TextStyle(fontSize: 18),
                   ),
                   accountEmail: Text(emailStr),
@@ -98,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               ListTile(
-                title: const Text('Home'),
+                title: Text(AppLocalizations.of(context)!.home),
                 onTap: () {
                   Navigator.pushNamed(context, "./");
                 },

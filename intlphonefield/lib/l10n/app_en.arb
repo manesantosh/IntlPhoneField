@@ -1,0 +1,22 @@
+{
+  "lastNameConst": "lastName",
+  "home" : "Home Screen",
+  "firstNameConst" : "firstName",
+  "astNameConst" : "lastName",
+  "emailConst" : "email",
+  "phoneConst": "Phone",
+  "title": "Flutter Demo",
+  "accountNumberConst": "accountNumber",
+  "routingNumberConst": "routingNumber",
+  "accountTypeConst": "accountType",
+  "bankNameConst": "bankName",
+  "paymentMethodConst": "method",
+  "addContact": "Add Contact",
+  "bankAccountDetailText": "Add your bank details",
+  "bankAccountDetailSubText": "Adding your bank account details will allow you to easily send and receive money to add from your contacts.",
+  "createAnAccount": "Create an account",
+  "continueText": "continue",
+  "emergencyAccount": "Emergency Account",
+  "businessAccount": "Business Account"
+
+}
